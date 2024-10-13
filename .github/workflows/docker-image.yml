@@ -28,4 +28,4 @@ jobs:
         file: ./Dockerfile
         platforms: linux/amd64
         push: true
-        tags: wcolglazier/docker-for-reinvent:latest
+        tags: wcolglazier/reinvent-community-env:latest

@@ -15,11 +15,15 @@ RUN conda install -n base -c conda-forge mamba && \
 RUN conda run -n reinvent.v3.2 python -m ensurepip --upgrade
 RUN conda run -n reinvent.v3.2 python -m pip install --upgrade pip setuptools wheel
 
-# Set the default shell to use bash and activate the conda environment
-SHELL ["conda", "run", "-n", "reinvent.v3.2", "/bin/bash", "-c"]
+# Set the default shell to bash and activate the conda environment automatically
+SHELL ["bash", "-c"]
+
+# Ensure the environment is activated by adding the source activate command in the entrypoint
+RUN echo "source activate reinvent.v3.2" > ~/.bashrc
+ENV PATH /opt/conda/envs/reinvent.v3.2/bin:$PATH
 
 # Copy the main.py script into the container
 COPY main.py .
 
-# Run the main.py script using the conda environment's Python interpreter
-CMD ["python", "main.py"]
+# Run the main.py script using the activated conda environment
+CMD ["bash", "-c", "source activate reinvent.v3.2 && python main.py"]

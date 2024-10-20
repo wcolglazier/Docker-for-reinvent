@@ -6,6 +6,7 @@ channels:
   - conda-forge
   - anaconda
   - defaults
+  - nvidia
 dependencies:
   - _libgcc_mutex=0.1
   - _pytorch_select=0.1
